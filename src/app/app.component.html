@@ -1,0 +1,156 @@
+<div class="container">
+  <hr>
+  <form [formGroup]="couponForm" (ngSubmit)="postCoupon()">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <select class="form-control" id="exampleFormControlSelect1" required formControlName="coupon_type">
+            <option value="">Coupon Type</option>
+            <option *ngFor="let coupontypes of couponsTypes" [ngValue]="coupontypes">{{ coupontypes }}</option>
+          </select>
+          <div *ngIf="couponType.coupon_type.invalid && couponType.coupon_type.touched" class="alert alert-danger m-2">
+            <small class="text-danger" *ngIf="couponType.coupon_type.errors?.required">
+              Please select Coupon Type
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <input [class.is-invalid]="couponCode.invalid && couponCode.touched" type="email" class="form-control"
+            formControlName="coupon_code" id="exampleFormControlInput1" required placeholder="Coupon_code">
+          <div *ngIf="couponCode.invalid && couponCode.touched" class="alert alert-danger m-2">
+            <small class="text-danger" *ngIf="couponCode.errors?.required">
+              Coupon Code is Required
+            </small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="startDate"> Start Date </label>
+              <input id="startDate" [class.is-invalid]="validFrom.invalid && validFrom.touched" required
+                formControlName="valid_from" name="valid_from" type="date">
+              <div *ngIf="validFrom.invalid && validFrom.touched" class="alert alert-danger m-2">
+                <small class="text-danger" *ngIf="validFrom.errors?.required">
+                  Please Select Valid Date
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="endDate"> End Date </label>
+              <input id="endDate" [class.is-invalid]="validTo.invalid && validTo.touched" formControlName="valid_to"
+                required name="valid_to" type="date">
+              <div *ngIf="validTo.invalid && validTo.touched" class="alert alert-danger m-2">
+                <small class="text-danger" *ngIf="validTo.errors?.required">
+                  Please Select Valid Date
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <select class="form-control" id="exampleFormControlSelect1" required formControlName="is_unlimited">
+                <option value="">Unlimited</option>
+                <option *ngFor="let limit of Limits" [ngValue]="limit">{{limit}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <select class="form-control" id="exampleFormControlSelect1" required formControlName="coupon_status">
+            <option value="">Coupon Status</option>
+            <option>Valid</option>
+            <option>Invalid</option>
+          </select>
+        </div>
+        <h3> COUPON RULES: </h3>
+        <div class="col-md-12" formArrayName="coupons">
+          <div *ngFor="let c of couponForm.controls.coupons['controls']; let i=index" [formGroupName]='i'>
+            <div class="card m-4">
+              <div class="card-header bg-primary">
+                <h5> RULE {{i +1}} </h5>
+                <a [routerLink] (click)="removeItem(i)" class="btn btn-danger float-right"> Remove </a>
+              </div>
+              <div class="row m-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      [class.is-invalid]="coupons.controls[i].get('min_amount').invalid && coupons.controls[i].get('min_amount').touched"
+                      type="text" placeholder="Min Amount" formControlName="min_amount" class="form-control"
+                      id="task{{i}}" required>
+                    <div
+                      *ngIf="coupons.controls[i].get('min_amount').invalid && coupons.controls[i].get('min_amount').touched"
+                      class="alert alert-danger m-2">
+                      <small class="text-danger" *ngIf="coupons.controls[i].get('min_amount').errors?.required">
+                        Min. Amount is Required</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      [class.is-invalid]="coupons.controls[i].get('max_amount').invalid && coupons.controls[i].get('max_amount').touched"
+                      type="text" placeholder="Max Amount" formControlName="max_amount" class="form-control"
+                      id="task{{i}}" required>
+                    <div
+                      *ngIf="coupons.controls[i].get('max_amount').invalid && coupons.controls[i].get('max_amount').touched"
+                      class="alert alert-danger m-2">
+                      <small class="text-danger mt-2" *ngIf="coupons.controls[i].get('min_amount').errors?.required">
+                        Max Amount is Required
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <select class="form-control" placeholder="Discount Type" required formControlName="discount_type"
+                      id="task{{i}}" class="form-control">
+                      <option value="">Discount Type</option>
+                      <option>10%</option>
+                      <option>20%</option>
+                    </select>
+                    <div
+                      *ngIf="coupons.controls[i].get('discount_type').invalid && coupons.controls[i].get('discount_type').touched"
+                      class="alert alert-danger m-2">
+                      <small class="text-danger" *ngIf="coupons.controls[i].get('discount_type').errors?.required">
+                        Please select Discount
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      [class.is-invalid]="coupons.controls[i].get('discount').invalid && coupons.controls[i].get('discount').touched"
+                      type="text" placeholder="Discount Amount" formControlName="discount" id="task{{i}}"
+                      class="form-control">
+                    <div
+                      *ngIf="coupons.controls[i].get('discount').invalid && coupons.controls[i].get('discount').touched"
+                      class="alert alert-danger m-2">
+                      <small class="text-danger mt-2" *ngIf="coupons.controls[i].get('discount').errors?.required">
+                        Please Select Discount Type
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" placeholder="Max Discount Amount" formControlName="max_discount" id="task{{i}}"
+                      class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Card-->
+          </div>
+        </div>
+
+        <button id="save" type="submit" class="btn btn-primary m-4"> Save </button>
+        <button class="btn btn-primary float-right mt-3" (click)="addNewCoupon()">+ Add More</button>
+        <hr>
+      </div>
+    </div>
+  </form>
+</div>
