@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(private fb: FormBuilder) {
     this.couponForm = this.fb.group({
       coupon_type: ['', Validators.required],
-      coupon_code: ['CODE_12', Validators.required],
+      coupon_code: ['', Validators.required],
       valid_from: ['', Validators.required],
       valid_to: ['', Validators.required],
       is_unlimited: ['', Validators.requiredTrue],

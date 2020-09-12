@@ -5,7 +5,7 @@
       <div class="col-md-8">
         <div class="form-group">
           <select class="form-control" id="exampleFormControlSelect1" required formControlName="coupon_type">
-            <option value="">Coupon Type</option>
+            <option value="">Coupon Type *</option>
             <option *ngFor="let coupontypes of couponsTypes" [ngValue]="coupontypes">{{ coupontypes }}</option>
           </select>
           <div *ngIf="couponType.coupon_type.invalid && couponType.coupon_type.touched" class="alert alert-danger m-2">
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
           <input [class.is-invalid]="couponCode.invalid && couponCode.touched" type="email" class="form-control"
-            formControlName="coupon_code" id="exampleFormControlInput1" required placeholder="Coupon_code">
+            formControlName="coupon_code" id="exampleFormControlInput1" required placeholder="Coupon_code *">
           <div *ngIf="couponCode.invalid && couponCode.touched" class="alert alert-danger m-2">
             <small class="text-danger" *ngIf="couponCode.errors?.required">
               Coupon Code is Required
@@ -26,7 +26,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="startDate"> Start Date </label>
+              <label for="startDate"> Start Date * </label>
               <input id="startDate" [class.is-invalid]="validFrom.invalid && validFrom.touched" required
                 formControlName="valid_from" name="valid_from" type="date">
               <div *ngIf="validFrom.invalid && validFrom.touched" class="alert alert-danger m-2">
@@ -38,7 +38,7 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="endDate"> End Date </label>
+              <label for="endDate"> End Date * </label>
               <input id="endDate" [class.is-invalid]="validTo.invalid && validTo.touched" formControlName="valid_to"
                 required name="valid_to" type="date">
               <div *ngIf="validTo.invalid && validTo.touched" class="alert alert-danger m-2">
@@ -51,7 +51,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <select class="form-control" id="exampleFormControlSelect1" required formControlName="is_unlimited">
-                <option value="">Unlimited</option>
+                <option value="">Unlimited *</option>
                 <option *ngFor="let limit of Limits" [ngValue]="limit">{{limit}}</option>
               </select>
             </div>
@@ -78,7 +78,7 @@
                   <div class="form-group">
                     <input
                       [class.is-invalid]="coupons.controls[i].get('min_amount').invalid && coupons.controls[i].get('min_amount').touched"
-                      type="text" placeholder="Min Amount" formControlName="min_amount" class="form-control"
+                      type="text" placeholder="Min Amount *" formControlName="min_amount" class="form-control"
                       id="task{{i}}" required>
                     <div
                       *ngIf="coupons.controls[i].get('min_amount').invalid && coupons.controls[i].get('min_amount').touched"
@@ -92,7 +92,7 @@
                   <div class="form-group">
                     <input
                       [class.is-invalid]="coupons.controls[i].get('max_amount').invalid && coupons.controls[i].get('max_amount').touched"
-                      type="text" placeholder="Max Amount" formControlName="max_amount" class="form-control"
+                      type="text" placeholder="Max Amount *" formControlName="max_amount" class="form-control"
                       id="task{{i}}" required>
                     <div
                       *ngIf="coupons.controls[i].get('max_amount').invalid && coupons.controls[i].get('max_amount').touched"
@@ -105,9 +105,9 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <select class="form-control" placeholder="Discount Type" required formControlName="discount_type"
+                    <select class="form-control" placeholder="Discount Type *" required formControlName="discount_type"
                       id="task{{i}}" class="form-control">
-                      <option value="">Discount Type</option>
+                      <option value="">Discount Type *</option>
                       <option>10%</option>
                       <option>20%</option>
                     </select>
@@ -124,7 +124,7 @@
                   <div class="form-group">
                     <input
                       [class.is-invalid]="coupons.controls[i].get('discount').invalid && coupons.controls[i].get('discount').touched"
-                      type="text" placeholder="Discount Amount" formControlName="discount" id="task{{i}}"
+                      type="text" placeholder="Discount Amount *" formControlName="discount" id="task{{i}}"
                       class="form-control">
                     <div
                       *ngIf="coupons.controls[i].get('discount').invalid && coupons.controls[i].get('discount').touched"
