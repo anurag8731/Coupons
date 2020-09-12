@@ -8,7 +8,7 @@ import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 })
 export class AppComponent {
   couponsTypes: any = ['User', 'User1', 'User2'];
-  Limits: any = ['Unlimited', 'Valid for 3 Months', 'Valid for 6 Months']
+  Limits: any = ['Valid for 3 Months', 'Valid for 6 Months']
 
   couponForm: FormGroup;
   constructor(private fb: FormBuilder) {
@@ -32,7 +32,7 @@ export class AppComponent {
   }
   // tslint:disable-next-line: typedef
   postCoupon() {
-    console.log(this.couponForm);
+    console.log(this.couponForm.value);
   }
 
   // tslint:disable-next-line: typedef
