@@ -5,7 +5,7 @@
       <div class="col-md-8">
         <div class="form-group">
           <select class="form-control" id="exampleFormControlSelect1" required formControlName="coupon_type">
-            <option value="">Coupon Typesss *</option>
+            <option value="">Coupon Type *</option>
             <option *ngFor="let coupontypes of couponsTypes" [ngValue]="coupontypes">{{ coupontypes }}</option>
           </select>
           <div *ngIf="couponType.coupon_type.invalid && couponType.coupon_type.touched" class="alert alert-danger m-2">
